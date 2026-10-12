@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'properties'
 ]
 
 MIDDLEWARE = [
@@ -73,11 +74,16 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+    "ENGINE": "django.contrib.gis.db.backends.postgis",
+    "NAME": "propertydb",
+    "USER": "postgres",
+    "PASSWORD": "postgres",
+    "HOST": "localhost",
+    "PORT": "5432",
     }
 }
+
 
 
 # Password validation
@@ -125,3 +131,7 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"

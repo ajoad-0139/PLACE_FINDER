@@ -29,10 +29,20 @@ class Command(BaseCommand):
         path = Path(settings.BASE_DIR) / options["csvfile"]
 
         # 1. read + clean with pandas
+        suffix = path.suffix.lower()
         try:
-            df = pd.read_csv(path)
+            if suffix == ".csv":
+                df = pd.read_csv(path)
+            elif suffix == ".parquet":
+                df = pd.read_parquet(path)
+            elif suffix in (".xlsx", ".xls"):
+                df = pd.read_excel(path)
+            else:
+                raise CommandError("Use a .csv, .parquet or .xlsx file")
+        except CommandError:
+            raise
         except Exception as exc:
-            raise CommandError(f"Failed to read CSV: {exc}")
+            raise CommandError(f"Failed to read file: {exc}")
 
         df.columns = df.columns.str.strip().str.lower()
         missing = [c for c in REQUIRED if c not in df.columns]

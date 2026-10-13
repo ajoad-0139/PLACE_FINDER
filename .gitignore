@@ -25,6 +25,8 @@ instance/
 .DS_Store
 Thumbs.db
 
+media
+
 # Testing / Coverage
 .pytest_cache/
 .coverage

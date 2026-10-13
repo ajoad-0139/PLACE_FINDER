@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "django.contrib.postgres",
     'properties'
 ]
 
@@ -76,14 +77,16 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     "default": {
     "ENGINE": "django.contrib.gis.db.backends.postgis",
-    "NAME": "propertydb",
+    "NAME": "appdb",
     "USER": "postgres",
     "PASSWORD": "postgres",
     "HOST": "localhost",
-    "PORT": "5432",
+    "PORT": "5442",
     }
 }
 
+
+EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 
 
 # Password validation

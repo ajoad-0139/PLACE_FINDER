@@ -19,7 +19,7 @@
     <section class="property-list-container">
         {% for property in properties %}
         <!-- property card -->
-        <a class="property-card" href="/properties/{{ property.slug }}/">
+        <a class="property-card" href="/api/v1/locations/nearby-properties?id={{ property.id }}">
             <!-- card image -->
             <div class="property-card-image-frame">
                 {% if property.primary_image %}

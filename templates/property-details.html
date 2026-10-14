@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}PropertyFinder | {{ property.title }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/properties.css' %}">
+<link rel="stylesheet" href="{% static 'css/property-detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="property-detail-section">
+    <!-- detail top section -->
+    <section class="property-detail-top">
+        <!-- top left: image -->
+        <section class="property-detail-image-section">
+            <div class="property-detail-image-frame">
+                {% if property.primary_image %}
+                <img class="property-detail-image" src="{{ property.primary_image.image.url }}" alt="{{ property.title }}">
+                {% else %}
+                <img class="property-detail-image" src="{% static property.image_path %}" alt="{{ property.title }}">
+                {% endif %}
+            </div>
+        </section>
+
+        <!-- top right: details info -->
+        <section class="property-detail-info-section">
+            <div class="property-detail-badges">
+                <span>{{ property.get_property_type_display }}</span>
+                <span>{{ property.get_status_display }}</span>
+                {% if property.is_featured %}
+                <span class="property-detail-featured">Featured</span>
+                {% endif %}
+            </div>
+
+            <h1 class="property-detail-title">{{ property.title }}</h1>
+            <p class="property-detail-address">
+                {% if property.address %}{{ property.address }}, {% endif %}{{ property.location.name }}
+            </p>
+            <p class="property-detail-price">${{ property.price|floatformat:"0g" }}</p>
+
+            <div class="property-detail-facts">
+                <div class="property-detail-fact">
+                    <span class="property-detail-fact-value">{{ property.bedrooms }}</span>
+                    <span class="property-detail-fact-label">Bedrooms</span>
+                </div>
+                <div class="property-detail-fact">
+                    <span class="property-detail-fact-value">{{ property.bathrooms|floatformat:"-1" }}</span>
+                    <span class="property-detail-fact-label">Bathrooms</span>
+                </div>
+                <div class="property-detail-fact">
+                    <span class="property-detail-fact-value">{{ property.sleeps }}</span>
+                    <span class="property-detail-fact-label">Sleeps</span>
+                </div>
+                <div class="property-detail-fact">
+                    <span class="property-detail-fact-value">{{ property.area_sqft|floatformat:"0g"|default:"-" }}</span>
+                    <span class="property-detail-fact-label">Sqft</span>
+                </div>
+            </div>
+
+            {% if property.description %}
+            <h2 class="property-detail-heading">About this property</h2>
+            <p class="property-detail-description">{{ property.description|linebreaksbr }}</p>
+            {% endif %}
+
+            {% if property.amenities.all %}
+            <h2 class="property-detail-heading">Amenities</h2>
+            <div class="property-detail-amenities">
+                {% for amenity in property.amenities.all %}
+                <span class="property-detail-amenity">{{ amenity.name }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="property-detail-meta">
+                {% if property.external_id %}<span>Ref: {{ property.external_id }}</span>{% endif %}
+                <span>Listed: {{ property.created_at|date:"d M Y" }}</span>
+                <span>Updated: {{ property.updated_at|date:"d M Y" }}</span>
+            </div>
+        </section>
+    </section>
+
+    <!-- detail bottom section: nearby properties -->
+    <section class="property-nearby-section">
+        <h2 class="property-nearby-title">Nearby properties</h2>
+        {% if nearby_properties %}
+        <section class="property-nearby-container">
+            {% for nearby in nearby_properties %}
+            {% include "property-card.html" with property=nearby %}
+            {% endfor %}
+        </section>
+        {% else %}
+        <p class="property-nearby-message">No nearby properties found.</p>
+        {% endif %}
+    </section>
+</section>
+{% endblock %}

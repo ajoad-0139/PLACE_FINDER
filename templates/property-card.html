@@ -1,0 +1,30 @@
+{% load static %}
+<!-- property card -->
+<a class="property-card" href="/api/v1/locations/nearby-properties?id={{ property.id }}">
+    <!-- card image -->
+    <div class="property-card-image-frame">
+        {% if property.primary_image %}
+        <img class="property-card-image" src="{{ property.primary_image.image.url }}" alt="{{ property.title }}">
+        {% else %}
+        <img class="property-card-image" src="{% static property.image_path %}" alt="{{ property.title }}">
+        {% endif %}
+    </div>
+    <!-- card content -->
+    <div class="property-card-body">
+        <div class="property-card-top">
+            <span class="property-card-type">{{ property.get_property_type_display }}</span>
+            <span class="property-card-status">{{ property.get_status_display }}</span>
+            {% if property.is_featured %}
+            <span class="property-card-featured">Featured</span>
+            {% endif %}
+        </div>
+        <h3 class="property-card-title">{{ property.title }}</h3>
+        <p class="property-card-address">{{ property.address }}</p>
+        <div class="property-card-details">
+            <span class="property-card-bedrooms">{{ property.bedrooms }} bed{{ property.bedrooms|pluralize }}</span>
+            <span class="property-card-bathrooms">{{ property.bathrooms|floatformat:"-1" }} bath{{ property.bathrooms|pluralize }}</span>
+            <span class="property-card-area">{{ property.area_sqft|floatformat:"0g" }} sqft</span>
+        </div>
+        <p class="property-card-price">${{ property.price|floatformat:"0g" }}</p>
+    </div>
+</a>

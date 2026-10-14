@@ -61,17 +61,23 @@ def get_properties_by_location(request):
 
 
 def get_nearby_properties(request) :
-    try:
-        property_id = int(request.GET.get("id", ""))
-        radius_km = float(request.GET.get("radius_km", 5))
-        limit = int(request.GET.get("limit", 10))
-    except ValueError:
-        return JsonResponse({"error": "id, radius_km and limit must be numbers"}, status=400)
+    
+    property_id = int(request.GET.get("id", ""))
+    radius_km = float(request.GET.get("radius_km", 5))
+    limit = int(request.GET.get("limit", 12))
+    
 
     if not (0 < radius_km <= 100) or not (1 <= limit <= 100):
         return JsonResponse({"error": "radius_km must be 0-100 and limit 1-100"}, status=400)
 
-    prop = Property.objects.filter(id=property_id).first()
+    prop = (
+        Property.objects
+        .select_related("location")
+        .prefetch_related("images", "amenities")
+        .defer("embedding", "footprint")
+        .filter(id=property_id)
+        .first()
+    )
 
     if prop is None:
         return JsonResponse({"error": "Property not found"}, status=404)
@@ -80,11 +86,15 @@ def get_nearby_properties(request) :
 
     nearby = (
         Property.objects
-        .filter(is_active=True, point__dwithin=(prop.point, D(km=radius_km)))   
-        .exclude(id=prop.id)                                                     
-        .annotate(distance=Distance("point", prop.point))                        
-        .order_by("distance")[:limit]                                            
+        .filter(is_active=True, point__dwithin=(prop.point, D(km=radius_km)))
+        .exclude(id=prop.id)
+        .annotate(distance=Distance("point", prop.point))
+        .order_by("distance")
+        .defer("embedding", "footprint")
+        .prefetch_related("images")[:limit]
     )
 
-    properties = list(nearby.values(*FIELDS))
-    return JsonResponse({"property_id": prop.id, "radius_km": radius_km, "results": properties})
+    return render(request, "property-details.html", {
+        "property": prop,
+        "nearby_properties": nearby,
+    })

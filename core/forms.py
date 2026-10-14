@@ -10,3 +10,8 @@ class LocationSearchForm(forms.Form):
             "autocomplete": "off",
         })
     )
+
+    location_id = forms.IntegerField(
+        required=False,
+        widget=forms.HiddenInput(attrs={'id': 'location-id'})
+    )

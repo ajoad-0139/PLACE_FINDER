@@ -1,5 +1,7 @@
 const searchInput = document.querySelector(".hero-search-input");
 const suggestedLocations = document.querySelector(".suggested-locations");
+const searchForm = document.querySelector(".hero-search-box");
+const locationIdInput = document.querySelector("#location-id");
 
 let selectedLocation = null;
 let suggestions = [];
@@ -8,6 +10,9 @@ let debounceTimer;
 if (searchInput && suggestedLocations) {
     searchInput.addEventListener("input", (event) => {
         const query = event.target.value.trim();
+
+        selectedLocation = null;
+        locationIdInput.value = "";
 
         clearTimeout(debounceTimer);
 
@@ -63,6 +68,7 @@ function renderSuggestions() {
             searchInput.value = suggestion.name;
 
             selectedLocation = suggestion;
+            locationIdInput.value = suggestion.id;
 
             suggestedLocations.innerHTML = "";
             suggestedLocations.style.display = "none";
@@ -73,3 +79,15 @@ function renderSuggestions() {
         suggestedLocations.appendChild(city);
     });
 }
+
+
+searchForm.addEventListener("submit", (event) => {
+    if (!selectedLocation) {
+        event.preventDefault();
+        searchInput.focus();
+        return;
+    }
+
+    // only location_id is sent, not the typed text
+    searchInput.disabled = true;
+});

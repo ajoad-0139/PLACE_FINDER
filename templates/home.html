@@ -16,8 +16,9 @@
     </section>
     <!-- hero search -->
     <section class="hero-search-section">
-        <form class="hero-search-box" method="get" action="/api/v1/locations/">
+        <form class="hero-search-box" method="get" action="/api/v1/locations/properties/">
                 {{ search_form.location_query }}
+                {{ search_form.location_id }}
             <button class="hero-search-button" type="submit">Search</button>
             <div class="suggested-locations" id="suggested-locations"></div>
         </form>

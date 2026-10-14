@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}PropertyFinder | Properties{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/properties.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="property-list-section">
+    <!-- list header -->
+    <h1 class="property-list-title">Properties</h1>
+    <p class="property-list-message">
+        {% if total %}{{ total }} properties found{% else %}No properties found for this location.{% endif %}
+    </p>
+
+    <!-- list grid -->
+    <section class="property-list-container">
+        {% for property in properties %}
+        <!-- property card -->
+        <a class="property-card" href="/properties/{{ property.slug }}/">
+            <!-- card image -->
+            <div class="property-card-image-frame">
+                {% if property.primary_image %}
+                <img class="property-card-image" src="{{ property.primary_image.image.url }}" alt="{{ property.title }}">
+                {% else %}
+                <img class="property-card-image" src="{% static property.image_path %}" alt="{{ property.title }}">
+                {% endif %}
+            </div>
+            <!-- card content -->
+            <div class="property-card-body">
+            <div class="property-card-top">
+                <span class="property-card-type">{{ property.property_type }}</span>
+                <span class="property-card-status">{{ property.status }}</span>
+                {% if property.is_featured %}
+                <span class="property-card-featured">Featured</span>
+                {% endif %}
+            </div>
+            <h3 class="property-card-title">{{ property.title }}</h3>
+            <p class="property-card-address">{{ property.address }}</p>
+            <div class="property-card-details">
+                <span class="property-card-bedrooms">{{ property.bedrooms }} bed{{ property.bedrooms|pluralize }}</span>
+                <span class="property-card-bathrooms">{{ property.bathrooms }} bath{{ property.bathrooms|pluralize }}</span>
+                <span class="property-card-area">{{ property.area_sqft|floatformat:"0g" }} sqft</span>
+            </div>
+            <p class="property-card-price">${{ property.price|floatformat:"0g" }}</p>
+            </div>
+        </a>
+        {% endfor %}
+    </section>
+    <!-- pagination -->
+    {% if total_pages > 1 %}
+    <section class="property-pagination-container">
+        {% if has_prev %}
+        <a class="property-pagination-button" href="?location_id={{ location_id }}&amp;limit={{ limit }}&amp;offset={{ prev_offset }}">Previous</a>
+        {% else %}
+        <span class="property-pagination-button property-pagination-button-disabled">Previous</span>
+        {% endif %}
+
+        <p class="property-pagination-counter">Page {{ page }} of {{ total_pages }}</p>
+
+        {% if has_next %}
+        <a class="property-pagination-button" href="?location_id={{ location_id }}&amp;limit={{ limit }}&amp;offset={{ next_offset }}">Next</a>
+        {% else %}
+        <span class="property-pagination-button property-pagination-button-disabled">Next</span>
+        {% endif %}
+    </section>
+    {% endif %}
+</section>
+{% endblock %}

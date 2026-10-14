@@ -131,6 +131,19 @@ class Property(models.Model):
                 return img
         return images[0] if images else None
 
+    @property
+    def image_path(self):
+        images = {
+            "apartment": "img/appartment.jpg",
+            "house": "img/house.jpg",
+            "condo": "img/condo.jpg",
+            "cabin": "img/cabin.jpg",
+            "cottage": "img/cottage.jpg",
+            "villa" :"img/villa.jpg"
+        }
+
+        return images.get(self.property_type, "img/default.jpg")
+
     def __str__(self):
         return self.title
 

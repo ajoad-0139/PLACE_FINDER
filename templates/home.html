@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}PropertyFinder | Home{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/hero.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hero-layout">
+    <!-- hero section -->
+    <section class="hero-section">
+        <h1 class="hero-title">Find a property by describing the area you want</h1>
+        <p class="hero-subtitle">Search by neighbourhood, landmark or lifestyle, and see matching properties nearby.</p>
+    </section>
+    <!-- hero search -->
+    <section class="hero-search-section">
+        <form class="hero-search-box" method="get" action="/api/v1/locations/">
+                {{ search_form.location_query }}
+            <button class="hero-search-button" type="submit">Search</button>
+            <div class="suggested-locations" id="suggested-locations"></div>
+        </form>
+    </section>
+</section>
+{% endblock %}

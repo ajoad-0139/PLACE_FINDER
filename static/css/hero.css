@@ -2,7 +2,7 @@
 
 .hero-layout{
     width: 100%;
-    min-height: calc(100vh - 72px);
+    min-height: calc(50vh - 72px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -171,5 +171,261 @@
 
     .hero-subtitle{
         font-size: small;
+    }
+}
+
+
+
+/* popular areas */
+
+.popular-areas-section{
+    width: 100%;
+    padding-top: 72px;
+    padding-bottom: 48px;
+}
+
+.section-heading{
+    max-width: 680px;
+    margin: 0 auto 36px;
+    text-align: center;
+}
+
+.section-label{
+    margin-bottom: 12px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: rgb(48, 150, 89);
+}
+
+.section-title{
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: rgb(47, 63, 47);
+}
+
+.section-subtitle{
+    margin-top: 12px;
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgb(117, 116, 115);
+}
+
+.popular-areas-grid{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.area-card{
+    overflow: hidden;
+    background-color: white;
+    border: 1px solid rgb(232, 235, 230);
+    border-radius: 16px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.area-card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgb(47 63 47 / 10%);
+}
+
+.area-image{
+    display: block;
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    background-color: rgb(235, 242, 232);
+}
+
+.area-card-content{
+    padding: 22px;
+}
+
+.area-category{
+    margin-bottom: 10px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: rgb(48, 150, 89);
+}
+
+.area-title{
+    font-size: 22px;
+    font-weight: 700;
+    color: rgb(47, 63, 47);
+}
+
+.area-description{
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgb(117, 116, 115);
+}
+
+/* features section */
+
+.features-section{
+    width: 100%;
+    padding: 64px 32px;
+    margin-top: 24px;
+    background-color: rgb(246, 248, 244);
+    border-radius: 20px;
+}
+
+.features-grid{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.feature-card{
+    padding: 28px 24px;
+    background-color: white;
+    border: 1px solid rgb(232, 235, 230);
+    border-radius: 14px;
+}
+
+.feature-icon{
+    width: 48px;
+    height: 48px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background-color: rgb(79 170 43 / 12%);
+    color: rgb(35, 99, 55);
+    font-size: 30px;
+}
+
+.feature-title{
+    font-size: 18px;
+    font-weight: 700;
+    color: rgb(47, 63, 47);
+}
+
+.feature-description{
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgb(117, 116, 115);
+}
+
+/* closing call to action */
+
+.home-cta-section{
+    width: 100%;
+    padding: 64px 24px;
+    margin-top: 48px;
+    margin-bottom: 48px;
+    text-align: center;
+    background-color: rgb(235, 243, 232);
+    border: 1px solid rgb(223, 235, 219);
+    border-radius: 20px;
+}
+
+.home-cta-content{
+    max-width: 620px;
+    margin: 0 auto;
+}
+
+.home-cta-title{
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: rgb(47, 63, 47);
+}
+
+.home-cta-description{
+    margin-top: 14px;
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgb(117, 116, 115);
+}
+
+.home-cta-button{
+    display: inline-block;
+    margin-top: 24px;
+    padding: 13px 28px;
+    background-color: rgb(48, 150, 89);
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+    transition: background-color 0.2s ease;
+}
+
+.home-cta-button:hover{
+    background-color: rgb(35, 99, 55);
+}
+
+/* responsive layout */
+
+@media(max-width: 900px){
+    .popular-areas-grid,
+    .features-grid{
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .area-card:last-child{
+        grid-column: 1 / -1;
+    }
+
+    .features-section{
+        padding: 48px 24px;
+    }
+}
+
+@media(max-width: 600px){
+    .popular-areas-section{
+        padding-top: 48px;
+        padding-bottom: 24px;
+    }
+
+    .section-heading{
+        margin-bottom: 28px;
+    }
+
+    .section-title{
+        font-size: 26px;
+    }
+
+    .section-subtitle{
+        font-size: 14px;
+    }
+
+    .popular-areas-grid,
+    .features-grid{
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .area-card:last-child{
+        grid-column: auto;
+    }
+
+    .area-image{
+        height: 190px;
+    }
+
+    .features-section{
+        padding: 36px 18px;
+        margin-top: 16px;
+    }
+
+    .feature-card{
+        padding: 24px 20px;
+    }
+
+    .home-cta-section{
+        padding: 44px 20px;
+        margin-top: 32px;
+        margin-bottom: 32px;
+    }
+
+    .home-cta-title{
+        font-size: 26px;
     }
 }

@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 {% load static %}
 
@@ -8,20 +9,81 @@
 {% endblock %}
 
 {% block content %}
+
+<!-- hero section -->
 <section class="hero-layout">
-    <!-- hero section -->
     <section class="hero-section">
         <h1 class="hero-title">Find a property by describing the area you want</h1>
         <p class="hero-subtitle">Search by neighbourhood, landmark or lifestyle, and see matching properties nearby.</p>
     </section>
+
     <!-- hero search -->
     <section class="hero-search-section">
         <form class="hero-search-box" method="get" action="/api/v1/locations/properties/">
-                {{ search_form.location_query }}
-                {{ search_form.location_id }}
+            {{ search_form.location_query }}
+            {{ search_form.location_id }}
             <button class="hero-search-button" type="submit">Search</button>
             <div class="suggested-locations" id="suggested-locations"></div>
         </form>
     </section>
 </section>
+
+<!-- why propertyfinder section -->
+<section class="features-section">
+    <section class="section-heading">
+        <p class="section-label">A BETTER WAY TO SEARCH</p>
+        <h2 class="section-title">Property searching, made simpler</h2>
+        <p class="section-subtitle">
+            Focus on the places and surroundings that matter most to you.
+        </p>
+    </section>
+
+    <section class="features-grid">
+        <article class="feature-card">
+            <section class="feature-icon">
+                <span>⌕</span>
+            </section>
+            <h3 class="feature-title">Search naturally</h3>
+            <p class="feature-description">
+                Describe a neighbourhood, landmark or area to begin your search.
+            </p>
+        </article>
+
+        <article class="feature-card">
+            <section class="feature-icon">
+                <span>◎</span>
+            </section>
+            <h3 class="feature-title">Explore locations</h3>
+            <p class="feature-description">
+                Discover places based on the areas and surroundings you prefer.
+            </p>
+        </article>
+
+        <article class="feature-card">
+            <section class="feature-icon">
+                <span>⌂</span>
+            </section>
+            <h3 class="feature-title">Find your next home</h3>
+            <p class="feature-description">
+                Explore available property options and compare what suits you.
+            </p>
+        </article>
+    </section>
+</section>
+
+<!-- closing call to action -->
+<section class="home-cta-section">
+    <section class="home-cta-content">
+        <p class="section-label">YOUR NEXT MOVE STARTS HERE</p>
+        <h2 class="home-cta-title">The right place begins with the right search.</h2>
+        <p class="home-cta-description">
+            Tell us about the area you have in mind and start exploring.
+        </p>
+        <a class="home-cta-button" href="#top"
+           onclick="document.querySelector('.hero-search-box input')?.focus(); return false;">
+            Start exploring
+        </a>
+    </section>
+</section>
+
 {% endblock %}

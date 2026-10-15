@@ -31,6 +31,7 @@ The `static/img/` folder (property photos such as `house.jpg`, `villa.jpg`, `apa
 ## Quick start (recommended)
 
 ```bash
+cd PLACE_FINDER
 chmod +x run.sh
 ./run.sh
 ```

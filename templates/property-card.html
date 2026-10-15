@@ -14,6 +14,7 @@
         <div class="property-card-top">
             <span class="property-card-type">{{ property.get_property_type_display }}</span>
             <span class="property-card-status">{{ property.get_status_display }}</span>
+            <span class="property-card-status">{{ property.distance.km|floatformat:2 }}{{" km away"}}</span>
             {% if property.is_featured %}
             <span class="property-card-featured">Featured</span>
             {% endif %}

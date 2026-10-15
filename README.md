@@ -24,9 +24,6 @@ A Django web app for finding vacation-rental properties by location. It combines
   - macOS: `brew install gdal geos proj`
 - Internet access on first run (the embedding model is downloaded once)
 
-## Important: the `img/` folder
-
-The `static/img/` folder (property photos such as `house.jpg`, `villa.jpg`, `apartment.jpg`, and `favicon.png`) is **not included in this copy** to keep the download small. It exists in the main repository. Make sure `static/img/` is present before running, otherwise pages still work but images will be broken.
 
 ## Quick start (recommended)
 

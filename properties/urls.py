@@ -8,6 +8,6 @@ urlpatterns = [
     path("autocomplete/", autocomplete_locations, name="sematic-location"),
 
     # browser paths
-    path("properties/", get_properties_by_location , name="get-properties-by-locations"),
-    path("nearby-properties/", get_nearby_properties, name="get-nearby-properties")
+    path("properties/", get_properties_by_location, name="get-properties-by-locations"),
+    path("nearby-properties/", get_nearby_properties, name="get-nearby-properties",),
 ]

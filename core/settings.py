@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "django.contrib.postgres",
     "django.contrib.gis",
-    'properties'
+    'properties',
+    "rest_framework",
 ]
 
 MIDDLEWARE = [

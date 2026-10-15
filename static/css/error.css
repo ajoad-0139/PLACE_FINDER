@@ -1,0 +1,46 @@
+
+.error-container {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.error-card {
+    max-width: 500px;
+    width: 100%;
+    padding: 40px 24px;
+    text-align: center;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.error-card h1 {
+    font-size: 28px;
+    margin-bottom: 16px;
+}
+
+.error-code {
+    color: #dc2626;
+    font-weight: 600;
+}
+
+.error-message {
+    color: #555555;
+    margin: 20px 0;
+}
+
+.error-button {
+    display: inline-block;
+    padding: 12px 20px;
+    background: #2e86c1;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.error-button:hover {
+    background: #216a9b;
+}
